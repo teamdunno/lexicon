@@ -1,11 +1,21 @@
 type Tokens = { [key: string]: RegExp }
 
+/**
+ * The type of a lexed token
+ *
+ * @field {string} name The type of the token
+ * @field {string} value The value that was matched
+ * @field {RegExp} matched The Regex of the token
+ */
 export interface Token {
     name: string;
     value: string;
     matched: RegExp
 }
 
+/**
+ * The basic lexer
+ */
 export class Lexer {
     tokens: Tokens;
     private buffer: string;
@@ -13,6 +23,11 @@ export class Lexer {
     private char: number;
     private output: Token[];
 
+    /**
+     * The constructor of a Lexer.
+     *
+     * @param tokens A dictionary of tokens, each with a name and regex
+     */
     constructor(tokens: Tokens) {
 	this.tokens = tokens;
 	this.buffer = "";
@@ -49,6 +64,12 @@ export class Lexer {
 	})
     }
 
+    /**
+     * The function for lexing some input string
+     *
+     * @param input The inputted string to lex
+     * @returns The list of tokens from the lexing process
+     */
     lex(input: string): Token[] {
 	this.input = input;
 
